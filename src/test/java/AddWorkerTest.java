@@ -47,6 +47,7 @@ public class AddWorkerTest {
 
         AddWorkerPage newWorkers = new AddWorkerPage(driver);
         newWorkers.addNewWorkerMethod("ahmad", "203256232", "jerusalem", "0545543624", "ahmad.abu.sneneh@hotail.com", "group", "12/02/2022", "18/02/2022");
+        Thread.sleep(10000);
         driver.switchTo().alert().accept();
 
     }
