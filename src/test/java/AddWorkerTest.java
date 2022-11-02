@@ -4,8 +4,8 @@ import org.openqa.selenium.WebDriver;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import pages.AddWorkerPage;
-import pages.goToFormaPages.GoToAddWorkerFormat;
-import pages.goToPages.GoToWorkerPage;
+import pages.GoToAddFeatureFormat;
+import pages.GoToFeaturePage;
 import pages.LoginPage;
 
 import java.util.List;
@@ -39,11 +39,20 @@ public class AddWorkerTest {
         driver.switchTo().alert().accept();
         Thread.sleep(5000);
 
-        GoToWorkerPage gotoWorker = new GoToWorkerPage(driver);
-        gotoWorker.gotoWorkerPageMethod();
+        //jobs pagePath = Jobs
+        //companies pagePath = Companies
+        //admin pagePath = Admins
+        //createSchedule pagePath = Create Weekly Schedule
+        //jobForm pagePath = Check Jobs Forms
+        GoToFeaturePage gotoWorker = new GoToFeaturePage(driver, "Workers");
+        gotoWorker.gotoFeaturePageMethod();
 
-        GoToAddWorkerFormat newWorker = new GoToAddWorkerFormat(driver);
-        newWorker.goToAddWorkerFormatMethod();
+        //linkTextPath of add company = Create New Copmany
+        //linkTextPath of add job = Create New Job
+
+        GoToAddFeatureFormat newWorker = new GoToAddFeatureFormat(driver, "Create New Wokrer");
+        newWorker.goToAddFeatureFormatMethod();
+
 
         AddWorkerPage newWorkers = new AddWorkerPage(driver);
         newWorkers.addNewWorkerMethod("ahmad", "203256232", "jerusalem", "0545543624", "ahmad.abu.sneneh@hotail.com", "group", "12/02/2022", "18/02/2022");
