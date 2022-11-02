@@ -10,10 +10,7 @@ public class GoToAddFeatureFormat {
 
 
     public GoToAddFeatureFormat(WebDriver driver, String linkTextPath) {
-        //this.Create_New_Company = driver.findElement(By.linkText("Create New Copmany"));
         this.Create_New_Feature = driver.findElement(By.linkText(linkTextPath));
-
-
     }
 
     public void goToAddFeatureFormatMethod() throws InterruptedException {
