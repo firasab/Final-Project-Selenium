@@ -8,8 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class getJobInformationPage {
-
-    WebElement jobInformation;
     WebElement company;
     WebElement Discription;
     WebElement Position;
@@ -28,14 +26,12 @@ public class getJobInformationPage {
     public void getJobsPage() throws InterruptedException {
 
         Thread.sleep(5000);
-
         String[] headers = new String[5];
         headers[0] = "company";
         headers[1] = "Discription";
         headers[2] = "Position";
         headers[3] = "PayPerHour";
         headers[4] = "Address";
-
 
         String[] website_data = new String[5];
         website_data[4] = company.getText();
