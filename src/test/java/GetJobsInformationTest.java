@@ -11,7 +11,7 @@ public class GetJobsInformationTest {
             driver.get("https://myjobs-1956b.web.app/view");
             driver.manage().window().maximize();
             Thread.sleep(10000);
-        getJobInformationPage aboutUs = new getJobInformationPage(driver , 3);
+            getJobInformationPage aboutUs = new getJobInformationPage(driver , 3);
             aboutUs.getJobsPage();
     }
 }
