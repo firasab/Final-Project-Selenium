@@ -7,7 +7,7 @@ import org.openqa.selenium.WebElement;
 import java.util.ArrayList;
 import java.util.List;
 
-public class getJobApplicationPage {
+public class ViewJobApplicationPage {
     WebElement PersonName;
     WebElement JobTitle;
     WebElement ID;
@@ -17,7 +17,7 @@ public class getJobApplicationPage {
     WebElement Note;
 
 
-    public getJobApplicationPage(WebDriver driver, int jobApplicationNumber) {
+    public ViewJobApplicationPage(WebDriver driver, int jobApplicationNumber) {
         this.PersonName = driver.findElement(By.xpath("//*[@id=\"root\"]/div/div[2]/div/div/div/div/div/header/div/table/tbody/tr["+jobApplicationNumber+"]/th"));
         this.JobTitle = driver.findElement(By.xpath("//*[@id=\"root\"]/div/div[2]/div/div/div/div/div/header/div/table/tbody/tr["+jobApplicationNumber+"]/td[1]"));
         this.ID = driver.findElement(By.xpath("//*[@id=\"root\"]/div/div[2]/div/div/div/div/div/header/div/table/tbody/tr["+jobApplicationNumber+"]/td[2]"));

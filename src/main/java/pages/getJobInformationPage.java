@@ -7,7 +7,7 @@ import org.openqa.selenium.WebElement;
 import java.util.ArrayList;
 import java.util.List;
 
-public class getJobInformationPage {
+public class getJobInformationPage { //getJobInformationPage
     WebElement company;
     WebElement Discription;
     WebElement Position;

@@ -8,7 +8,7 @@ import pages.*;
 import java.util.List;
 
 
-public class ViewJobApplicationTest {
+public class EditWorkerTest {
     @DataProvider
     public static Object[][] getData() throws Exception{
 
@@ -41,12 +41,20 @@ public class ViewJobApplicationTest {
         //admin pagePath = Admins
         //createSchedule pagePath = Create Weekly Schedule
         //jobForm pagePath = Check Jobs Forms
-        GoToFeaturePage gotoWorker = new GoToFeaturePage(driver, "Check Jobs Forms");
+        GoToFeaturePage gotoWorker = new GoToFeaturePage(driver, "Workers");
         gotoWorker.gotoFeaturePageMethod();
 
+        //linkTextPath of add company = Create New Copmany
+        //linkTextPath of add job = Create New Job
+
+        EditWorkerPage editWorker = new EditWorkerPage(driver, 2);
+        editWorker.editWorkerMethod();
+
+
+        EditWorkerFormatPage editWorker1 = new EditWorkerFormatPage(driver);
+        editWorker1.editWorkerMethod("ahmad", "203256232", "jerusalem", "0545543624", "ahmad.abu.sneneh@hotail.com", "group",  "18/02/2022");
         Thread.sleep(10000);
-        ViewJobApplicationPage aboutUs = new ViewJobApplicationPage(driver , 1);
-        aboutUs.getJobsApplicationPageMethod();
+        driver.switchTo().alert().accept();
 
     }
 
