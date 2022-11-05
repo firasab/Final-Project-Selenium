@@ -1,18 +1,27 @@
+import core.Constants;
 import core.OpenBrowsers;
 import core.ReadCsvFile;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
-import pages.*;
+import pages.AddPages.AddAdminPage;
+import pages.GoToPages.GoToAddFeatureFormat;
+import pages.GoToPages.GoToFeaturePage;
+import pages.LogIn.LoginPage;
 
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.List;
+import java.util.Properties;
 
 
 public class AddAdminTest {
+
     @DataProvider
     public static Object[][] getData() throws Exception{
 
-        List<String[]> lines = ReadCsvFile.readAllLines("loginInfo.csv");
+        List<String[]> lines = ReadCsvFile.readAllLines(Constants.ReadFolderPath+"AdminInformation.csv");
         lines.remove(0);
         Object[][] data = new Object[lines.size()][lines.get(0).length];
         int index = 0;
@@ -24,14 +33,20 @@ public class AddAdminTest {
     }
 
     @Test(dataProvider = "getData")
-    public void testExpediaLinks(String email, String password) throws InterruptedException {
+    public void addAdminTest( String adminName, String adminEmail, String adminID, String adminFirstPassWord, String adminSecPassWord ) throws InterruptedException, IOException {
+
+        FileReader readFile = new FileReader(Constants.ReadFolderPath+"props.properties");
+        Properties prop = new Properties();
+        prop.load(readFile);
+        String Email = prop.getProperty("email");
+        String Password = prop.getProperty("password");
 
         WebDriver driver = OpenBrowsers.openBrowser("chrome");
         driver.get("https://myjobs-1956b.web.app/login");
         driver.manage().window().maximize();
         Thread.sleep(5000);
         LoginPage login = new LoginPage(driver);
-        login.loginMethod(email, password);
+        login.loginMethod(Email, Password);
         Thread.sleep(10000);
         driver.switchTo().alert().accept();
         Thread.sleep(5000);
@@ -50,12 +65,10 @@ public class AddAdminTest {
         GoToAddFeatureFormat newWorker = new GoToAddFeatureFormat(driver, "Create New Admin");
         newWorker.goToAddFeatureFormatMethod();
 
-
         AddAdminPage newAdmin = new AddAdminPage(driver);
-        newAdmin.addAdminMethod("ahmad", "mah@admin.com", "332653236", "123456", "123456");
+        newAdmin.addAdminMethod( adminName,  adminEmail,  adminID,  adminFirstPassWord,  adminSecPassWord);
         Thread.sleep(10000);
         driver.switchTo().alert().accept();
-
     }
 
 

@@ -1,10 +1,11 @@
+import core.Constants;
 import core.OpenBrowsers;
 import core.TakeScreenShot;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Test;
-import pages.AboutWebPage;
+import pages.AboutWebPage.AboutWebPage;
 
 import java.io.IOException;
 
@@ -24,16 +25,16 @@ public class AboutUsPageTest {
     }
 
     @Test
-    public void workWithComboBox() throws InterruptedException, IOException {
+    public void getAboutUsTest() throws InterruptedException, IOException {
             AboutWebPage aboutUs = new AboutWebPage(driver);
             aboutUs.getAboutUsPage();
             Thread.sleep(5000);
-            takeScr.takeScreenShot("AboutUS"+imageNumber+".png");
+            takeScr.takeScreenShot(Constants.PicturesFolderPath+"AboutUS"+imageNumber+".png");
     }
 
 
     @BeforeMethod
     public void beforeMethod() {
-        driver.get("https://myjobs-1956b.web.app/login");
+        driver.get(Constants.LOGIN_URL);
     }
 }
