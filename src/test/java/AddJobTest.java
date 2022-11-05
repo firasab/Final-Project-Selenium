@@ -1,7 +1,10 @@
 import core.Constants;
 import core.OpenBrowsers;
 import core.ReadCsvFile;
+import core.TakeScreenShot;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import pages.AddPages.AddJobPage;
@@ -15,8 +18,13 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Properties;
 
+import static org.testng.AssertJUnit.assertEquals;
+
 
 public class AddJobTest {
+    WebElement Name, Description, Position, PayPerHour, Address;
+    TakeScreenShot takeScr;
+
     @DataProvider
     public static Object[][] getData() throws Exception{
 
@@ -41,6 +49,7 @@ public class AddJobTest {
         String Password = prop.getProperty("password");
 
         WebDriver driver = OpenBrowsers.openBrowser("chrome");
+        takeScr = new TakeScreenShot(driver);
         driver.get(Constants.LOGIN_URL);
         driver.manage().window().maximize();
         Thread.sleep(5000);
@@ -69,6 +78,25 @@ public class AddJobTest {
         newWorkers.addNewJobMethod(jobName, jobDiscription, jobPosition, jobPayPerHour, jobAddress, path);
         Thread.sleep(10000);
         driver.switchTo().alert().accept();
+
+        Thread.sleep(10000);
+        takeScr.takeScreenShot(Constants.PicturesFolderPath+"jobs.png");
+
+        int jobNumber = 3;
+
+        this.Name = driver.findElement(By.xpath("//*[@id=\"table-to-xls\"]/tbody/tr["+jobNumber+"]/th"));
+        this.Description = driver.findElement(By.xpath("//*[@id=\"table-to-xls\"]/tbody/tr["+jobNumber+"]/td[1]"));
+        this.Position = driver.findElement(By.xpath("//*[@id=\"table-to-xls\"]/tbody/tr["+jobNumber+"]/td[2]"));
+        this.PayPerHour = driver.findElement(By.xpath("//*[@id=\"table-to-xls\"]/tbody/tr["+jobNumber+"]/td[3]"));
+        this.Address = driver.findElement(By.xpath("//*[@id=\"table-to-xls\"]/tbody/tr["+jobNumber+"]/td[4]"));
+
+
+        assertEquals(jobName, this.Name.getText());
+        assertEquals(jobDiscription, this.Description.getText());
+        assertEquals(jobPosition, this.Position.getText());
+        assertEquals(jobPayPerHour, this.PayPerHour.getText());
+        assertEquals(jobAddress, this.Address.getText());
+
 
     }
 

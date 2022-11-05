@@ -49,6 +49,8 @@ public class ViewWorkerTest {
         ViewWorkerPage viewWorker = new ViewWorkerPage(driver, 1);
         viewWorker.viewWorkerMethod();
 
+
+
     }
 
 

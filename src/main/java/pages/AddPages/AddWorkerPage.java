@@ -48,6 +48,7 @@ public class AddWorkerPage {
         Thread.sleep(5000);
         this.addBtn.click();
 
+
     }
 }
 
