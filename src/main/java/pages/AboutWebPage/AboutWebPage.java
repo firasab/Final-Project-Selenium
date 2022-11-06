@@ -1,7 +1,5 @@
 package pages.AboutWebPage;
-
 import core.Constants;
-import core.TakeScreenShot;
 import core.WriteCsvFile;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;

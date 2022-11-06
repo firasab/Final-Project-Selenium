@@ -7,14 +7,13 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
+import pages.DeletePages.DeleteJobPage;
 import pages.EditPages.EditJobFormatPage;
 import pages.EditPages.EditJobPage;
-import pages.EditPages.EditWorkerFormatPage;
-import pages.EditPages.EditWorkerPage;
 import pages.GoToPages.GoToFeaturePage;
 import pages.LogIn.LoginPage;
+import pages.ViewPages.ViewJobPage;
 
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.List;
@@ -23,7 +22,7 @@ import java.util.Properties;
 import static org.testng.AssertJUnit.assertEquals;
 
 
-public class EditJobTest {
+public class EditThenDeleteJobFlowTest {
     WebElement Name, Description, Position, PayPerHour, Address;
     TakeScreenShot takeScr;
 
@@ -62,16 +61,10 @@ public class EditJobTest {
         driver.switchTo().alert().accept();
         Thread.sleep(5000);
 
-        //jobs pagePath = Jobs
-        //companies pagePath = Companies
-        //admin pagePath = Admins
-        //createSchedule pagePath = Create Weekly Schedule
-        //jobForm pagePath = Check Jobs Forms
+
         GoToFeaturePage gotoWorker = new GoToFeaturePage(driver, "Jobs");
         gotoWorker.gotoFeaturePageMethod();
 
-        //linkTextPath of add company = Create New Copmany
-        //linkTextPath of add job = Create New Job
 
         EditJobPage editJob = new EditJobPage(driver, 2);
         editJob.editJobMethod();
@@ -99,6 +92,19 @@ public class EditJobTest {
         assertEquals(jobPosition, this.Position.getText());
         assertEquals(jobPayPerHour, this.PayPerHour.getText());
         assertEquals(jobAddress, this.Address.getText());
+
+        Thread.sleep(5000);
+        ViewJobPage viewJob = new ViewJobPage(driver, 2);
+        viewJob.viewJobMethod();
+
+        Thread.sleep(5000);
+        GoToFeaturePage gotoDeleteJob = new GoToFeaturePage(driver, "Jobs");
+        gotoDeleteJob.gotoFeaturePageMethod();
+
+        DeleteJobPage deleteJob = new DeleteJobPage(driver, 2);
+        deleteJob.deleteJobMethod();
+        Thread.sleep(5000);
+        driver.switchTo().alert().accept();
 
     }
 

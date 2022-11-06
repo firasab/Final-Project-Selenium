@@ -1,22 +1,27 @@
 import core.Constants;
 import core.OpenBrowsers;
 import core.ReadCsvFile;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import pages.AddPages.AddAdminPage;
+import pages.DeletePages.DeleteAdminPage;
 import pages.GoToPages.GoToAddFeatureFormat;
 import pages.GoToPages.GoToFeaturePage;
 import pages.LogIn.LoginPage;
 
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.List;
 import java.util.Properties;
 
+import static org.testng.AssertJUnit.assertEquals;
 
-public class AddAdminTest {
+
+public class AddAdminThenDeleteAdminFlowTest {
+    WebElement Name,  Email;
 
     @DataProvider
     public static Object[][] getData() throws Exception{
@@ -51,23 +56,30 @@ public class AddAdminTest {
         driver.switchTo().alert().accept();
         Thread.sleep(5000);
 
-        //jobs pagePath = Jobs
-        //companies pagePath = Companies
-        //admin pagePath = Admins
-        //createSchedule pagePath = Create Weekly Schedule
-        //jobForm pagePath = Check Jobs Forms
         GoToFeaturePage gotoWorker = new GoToFeaturePage(driver, "Admins");
         gotoWorker.gotoFeaturePageMethod();
 
-        //linkTextPath of add company = Create New Copmany
-        //linkTextPath of add job = Create New Job
-
-        GoToAddFeatureFormat newWorker = new GoToAddFeatureFormat(driver, "Create New Admin");
-        newWorker.goToAddFeatureFormatMethod();
+        GoToAddFeatureFormat goToNewAdmin = new GoToAddFeatureFormat(driver, "Create New Admin");
+        goToNewAdmin.goToAddFeatureFormatMethod();
 
         AddAdminPage newAdmin = new AddAdminPage(driver);
         newAdmin.addAdminMethod( adminName,  adminEmail,  adminID,  adminFirstPassWord,  adminSecPassWord);
         Thread.sleep(10000);
+        driver.switchTo().alert().accept();
+
+        Thread.sleep(5000);
+        int adminNumber = 2;
+
+        this.Name = driver.findElement(By.xpath("//*[@id=\"table-to-xls\"]/tbody/tr["+adminNumber+"]/th"));
+        this.Email = driver.findElement(By.xpath("//*[@id=\"table-to-xls\"]/tbody/tr["+adminNumber+"]/td[1]"));
+
+        assertEquals(adminName, this.Name.getText());
+        assertEquals(adminEmail, this.Email.getText());
+
+        Thread.sleep(5000);
+        DeleteAdminPage deleteAdmin = new DeleteAdminPage(driver, 2);
+        deleteAdmin.deleteAdminMethod();
+        Thread.sleep(5000);
         driver.switchTo().alert().accept();
     }
 

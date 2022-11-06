@@ -7,14 +7,13 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
+import pages.DeletePages.DeleteCompanyPage;
 import pages.EditPages.EditCompanyFormatPage;
 import pages.EditPages.EditCompanyPage;
-import pages.EditPages.EditJobFormatPage;
-import pages.EditPages.EditJobPage;
 import pages.GoToPages.GoToFeaturePage;
 import pages.LogIn.LoginPage;
+import pages.ViewPages.ViewCompanyPage;
 
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.List;
@@ -23,7 +22,7 @@ import java.util.Properties;
 import static org.testng.AssertJUnit.assertEquals;
 
 
-public class EditCompanyTest {
+public class EditThenDeleteCompanyFlowTest {
     WebElement Name, Field, NumberOfWorker, Address;
     TakeScreenShot takeScr;
     @DataProvider
@@ -95,6 +94,20 @@ public class EditCompanyTest {
         assertEquals(companyField, this.Field.getText());
         assertEquals(companyNumberOfWorker, this.NumberOfWorker.getText());
         assertEquals(companyAddress, this.Address.getText());
+
+        Thread.sleep(5000);
+        ViewCompanyPage viewCompany = new ViewCompanyPage(driver, 2);
+        viewCompany.viewCompanyMethod();
+
+        Thread.sleep(5000);
+        GoToFeaturePage gotoDeleteCompany = new GoToFeaturePage(driver, "Companies");
+        gotoDeleteCompany.gotoFeaturePageMethod();
+
+        DeleteCompanyPage deleteCompany = new DeleteCompanyPage(driver, 2);
+        deleteCompany.deleteCompanyMethod();
+        Thread.sleep(5000);
+        driver.switchTo().alert().accept();
+
 
     }
 

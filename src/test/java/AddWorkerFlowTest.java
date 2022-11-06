@@ -7,12 +7,11 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
-import pages.EditPages.EditWorkerFormatPage;
-import pages.EditPages.EditWorkerPage;
+import pages.AddPages.AddWorkerPage;
+import pages.GoToPages.GoToAddFeatureFormat;
 import pages.GoToPages.GoToFeaturePage;
 import pages.LogIn.LoginPage;
-
-import java.io.FileNotFoundException;
+import pages.ViewPages.ViewWorkerPage;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.List;
@@ -20,13 +19,15 @@ import java.util.Properties;
 import static org.testng.AssertJUnit.assertEquals;
 
 
-public class EditWorkerTest {
+public class AddWorkerFlowTest {
     WebElement WorkerName, WorkerId, WorkerAddress, WorkerPhoneNumber, workerEmail, workerCompany;
     TakeScreenShot takeScr;
-    @DataProvider
-    public static Object[][] getData() throws Exception{
 
-        List<String[]> lines = ReadCsvFile.readAllLines(Constants.ReadFolderPath+"editWorkerInformation.csv");
+
+    @DataProvider
+    public static Object[][] addWorkerData() throws Exception{
+
+        List<String[]> lines = ReadCsvFile.readAllLines(Constants.ReadFolderPath+"workerInformation.csv");
         lines.remove(0);
         Object[][] data = new Object[lines.size()][lines.get(0).length];
         int index = 0;
@@ -37,8 +38,9 @@ public class EditWorkerTest {
         return data;
     }
 
-    @Test (dataProvider = "getData")
-    public void editWorkerTest( String name, String id, String address, String phoneNumber, String email, String company, String dateOfFinishingJob ,String path) throws InterruptedException, IOException {
+
+    @Test (dataProvider = "addWorkerData")
+    public void addWorkerTest(String name, String id, String address, String phoneNumber, String email, String company, String dateOfStartingJob, String dateOfFinishingJob , String path) throws InterruptedException, IOException {
 
         FileReader readFile = new FileReader(Constants.ReadFolderPath+"props.properties");
         Properties prop = new Properties();
@@ -57,27 +59,21 @@ public class EditWorkerTest {
         driver.switchTo().alert().accept();
         Thread.sleep(5000);
 
-        //jobs pagePath = Jobs
-        //companies pagePath = Companies
-        //admin pagePath = Admins
-        //createSchedule pagePath = Create Weekly Schedule
-        //jobForm pagePath = Check Jobs Forms
         GoToFeaturePage gotoWorker = new GoToFeaturePage(driver, "Workers");
         gotoWorker.gotoFeaturePageMethod();
+        takeScr.takeScreenShot(Constants.PicturesFolderPath+"workersBeforeAdd.png");
 
-        //linkTextPath of add company = Create New Copmany
-        //linkTextPath of add job = Create New Job
-        EditWorkerPage editWorker = new EditWorkerPage(driver, 2);
-        editWorker.editWorkerMethod();
+        GoToAddFeatureFormat newWorker = new GoToAddFeatureFormat(driver, "Create New Wokrer");
+        newWorker.goToAddFeatureFormatMethod();
 
 
-        EditWorkerFormatPage editWorker1 = new EditWorkerFormatPage(driver);
-        editWorker1.editWorkerMethod(name, id, address, phoneNumber, email, company, dateOfFinishingJob, path);
+        AddWorkerPage newWorkers = new AddWorkerPage(driver);
+        newWorkers.addNewWorkerMethod(name, id, address, phoneNumber, email, company, dateOfStartingJob, dateOfFinishingJob, path);
         Thread.sleep(10000);
         driver.switchTo().alert().accept();
 
         Thread.sleep(10000);
-        takeScr.takeScreenShot(Constants.PicturesFolderPath+"editWorkers.png");
+        takeScr.takeScreenShot(Constants.PicturesFolderPath+"workersAfterAdd.png");
 
         int workerNumber = 2;
 
@@ -95,6 +91,9 @@ public class EditWorkerTest {
         assertEquals(email, this.workerEmail.getText());
         assertEquals(company, this.workerCompany.getText());
 
+        Thread.sleep(5000);
+        ViewWorkerPage viewWorker = new ViewWorkerPage(driver, 2);
+        viewWorker.viewWorkerMethod();
     }
 
 

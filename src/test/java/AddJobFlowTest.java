@@ -11,8 +11,8 @@ import pages.AddPages.AddJobPage;
 import pages.GoToPages.GoToAddFeatureFormat;
 import pages.GoToPages.GoToFeaturePage;
 import pages.LogIn.LoginPage;
+import pages.ViewPages.ViewJobPage;
 
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.List;
@@ -21,7 +21,7 @@ import java.util.Properties;
 import static org.testng.AssertJUnit.assertEquals;
 
 
-public class AddJobTest {
+public class AddJobFlowTest {
     WebElement Name, Description, Position, PayPerHour, Address;
     TakeScreenShot takeScr;
 
@@ -96,6 +96,10 @@ public class AddJobTest {
         assertEquals(jobPosition, this.Position.getText());
         assertEquals(jobPayPerHour, this.PayPerHour.getText());
         assertEquals(jobAddress, this.Address.getText());
+
+        Thread.sleep(5000);
+        ViewJobPage viewJob = new ViewJobPage(driver, 2);
+        viewJob.viewJobMethod();
 
 
     }

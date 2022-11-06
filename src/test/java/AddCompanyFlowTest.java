@@ -11,8 +11,8 @@ import pages.AddPages.AddCompanyPage;
 import pages.GoToPages.GoToAddFeatureFormat;
 import pages.GoToPages.GoToFeaturePage;
 import pages.LogIn.LoginPage;
+import pages.ViewPages.ViewCompanyPage;
 
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.List;
@@ -21,7 +21,7 @@ import java.util.Properties;
 import static org.testng.AssertJUnit.assertEquals;
 
 
-public class AddCompanyTest {
+public class AddCompanyFlowTest {
     WebElement Name, Field, NumberOfWorker, Address;
     TakeScreenShot takeScr;
     @DataProvider
@@ -93,6 +93,10 @@ public class AddCompanyTest {
         assertEquals(companyField, this.Field.getText());
         assertEquals(companyNumberOfWorker, this.NumberOfWorker.getText());
         assertEquals(companyAddress, this.Address.getText());
+
+        Thread.sleep(5000);
+        ViewCompanyPage viewCompany = new ViewCompanyPage(driver, 2);
+        viewCompany.viewCompanyMethod();
 
 
 
