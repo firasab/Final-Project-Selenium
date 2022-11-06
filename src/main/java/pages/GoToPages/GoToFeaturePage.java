@@ -8,13 +8,9 @@ public class GoToFeaturePage {
     WebElement Feature;
     WebDriver driver;
 
-
-
     public GoToFeaturePage(WebDriver driver , String pagePath) {
         this.driver = driver;
         this.Feature = driver.findElement(By.linkText(pagePath));
-
-
     }
 
     public void gotoFeaturePageMethod() throws InterruptedException {

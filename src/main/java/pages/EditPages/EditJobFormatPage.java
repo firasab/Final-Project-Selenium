@@ -5,25 +5,20 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
-
 import java.io.File;
 
 public class EditJobFormatPage {
-
     WebElement jobName;
     WebElement discription;
     WebElement position;
     WebElement payPerHour;
     WebElement address;
-
     WebElement image;
     WebElement addBtn;
-
-
     WebDriver driver;
+
     public EditJobFormatPage(WebDriver driver) {
         this.driver = driver;
-
         jobName = driver.findElement(By.id("jobName"));
         discription = driver.findElement(By.id("discription"));
         position = driver.findElement(By.id("position"));
@@ -43,8 +38,6 @@ public class EditJobFormatPage {
     }
 
     public void editJobMethod(String jobName, String discription, String position, String payPerHour, String address, String path) throws InterruptedException {
-
-
             ClearJobField(this.jobName);
             this.jobName.sendKeys(jobName);
 
@@ -65,7 +58,6 @@ public class EditJobFormatPage {
 
             Thread.sleep(5000);
             addBtn.click();
-
     }
 }
 

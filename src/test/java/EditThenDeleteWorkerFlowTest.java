@@ -13,12 +13,10 @@ import pages.EditPages.EditWorkerPage;
 import pages.GoToPages.GoToFeaturePage;
 import pages.LogIn.LoginPage;
 import pages.ViewPages.ViewWorkerPage;
-
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.List;
 import java.util.Properties;
-
 import static org.testng.AssertJUnit.assertEquals;
 
 
@@ -27,7 +25,6 @@ public class EditThenDeleteWorkerFlowTest {
     TakeScreenShot takeScr;
     @DataProvider
     public static Object[][] getData() throws Exception{
-
         List<String[]> lines = ReadCsvFile.readAllLines(Constants.ReadFolderPath+"editWorkerInformation.csv");
         lines.remove(0);
         Object[][] data = new Object[lines.size()][lines.get(0).length];
@@ -41,30 +38,30 @@ public class EditThenDeleteWorkerFlowTest {
 
     @Test (dataProvider = "getData")
     public void editWorkerTest( String name, String id, String address, String phoneNumber, String email, String company, String dateOfFinishingJob ,String path) throws InterruptedException, IOException {
-
         FileReader readFile = new FileReader(Constants.ReadFolderPath+"props.properties");
         Properties prop = new Properties();
         prop.load(readFile);
         String Email = prop.getProperty("email");
         String Password = prop.getProperty("password");
-
+        //--------------------------------------------------------------------------------------------------------------
         WebDriver driver = OpenBrowsers.openBrowser("chrome");
         takeScr = new TakeScreenShot(driver);
         driver.get(Constants.LOGIN_URL);
         driver.manage().window().maximize();
         Thread.sleep(5000);
+        //--------------------------------------------------------------------------------------------------------------
         LoginPage login = new LoginPage(driver);
         login.loginMethod(Email, Password);
         Thread.sleep(10000);
         driver.switchTo().alert().accept();
         Thread.sleep(5000);
-
+        //--------------------------------------------------------------------------------------------------------------
         GoToFeaturePage gotoWorker = new GoToFeaturePage(driver, "Workers");
         gotoWorker.gotoFeaturePageMethod();
-
+        //--------------------------------------------------------------------------------------------------------------
         EditWorkerPage editWorker = new EditWorkerPage(driver, 2);
         editWorker.editWorkerMethod();
-
+        //--------------------------------------------------------------------------------------------------------------
         EditWorkerFormatPage editWorker1 = new EditWorkerFormatPage(driver);
         editWorker1.editWorkerMethod(name, id, address, phoneNumber, email, company, dateOfFinishingJob, path);
         Thread.sleep(10000);
@@ -72,7 +69,7 @@ public class EditThenDeleteWorkerFlowTest {
 
         Thread.sleep(10000);
         takeScr.takeScreenShot(Constants.PicturesFolderPath+"editWorkers.png");
-
+        //--------------------------------------------------------------------------------------------------------------
         int workerNumber = 2;
 
         this.WorkerName = driver.findElement(By.xpath("//*[@id=\"table-to-xls\"]/tbody/tr["+workerNumber+"]/th"));
@@ -88,20 +85,19 @@ public class EditThenDeleteWorkerFlowTest {
         assertEquals(phoneNumber, this.WorkerPhoneNumber.getText());
         assertEquals(email, this.workerEmail.getText());
         assertEquals(company, this.workerCompany.getText());
-
+        //--------------------------------------------------------------------------------------------------------------
         Thread.sleep(5000);
         ViewWorkerPage viewWorker = new ViewWorkerPage(driver, 2);
         viewWorker.viewWorkerMethod();
-
+        //--------------------------------------------------------------------------------------------------------------
         Thread.sleep(5000);
         GoToFeaturePage gotoDeleteWorker = new GoToFeaturePage(driver, "Workers");
         gotoDeleteWorker.gotoFeaturePageMethod();
-
+        //--------------------------------------------------------------------------------------------------------------
         DeleteWorkerPage deleteWorker = new DeleteWorkerPage(driver, 2);
         deleteWorker.deleteWorkerMethod();
         Thread.sleep(5000);
         driver.switchTo().alert().accept();
-
     }
 
 

@@ -41,32 +41,31 @@ public class AddWorkerFlowTest {
 
     @Test (dataProvider = "addWorkerData")
     public void addWorkerTest(String name, String id, String address, String phoneNumber, String email, String company, String dateOfStartingJob, String dateOfFinishingJob , String path) throws InterruptedException, IOException {
-
         FileReader readFile = new FileReader(Constants.ReadFolderPath+"props.properties");
         Properties prop = new Properties();
         prop.load(readFile);
         String Email = prop.getProperty("email");
         String Password = prop.getProperty("password");
-
+        //--------------------------------------------------------------------------------------------------------------
         WebDriver driver = OpenBrowsers.openBrowser("chrome");
         takeScr = new TakeScreenShot(driver);
         driver.get(Constants.LOGIN_URL);
         driver.manage().window().maximize();
         Thread.sleep(5000);
+        //--------------------------------------------------------------------------------------------------------------
         LoginPage login = new LoginPage(driver);
         login.loginMethod(Email, Password);
         Thread.sleep(10000);
         driver.switchTo().alert().accept();
         Thread.sleep(5000);
-
+        //--------------------------------------------------------------------------------------------------------------
         GoToFeaturePage gotoWorker = new GoToFeaturePage(driver, "Workers");
         gotoWorker.gotoFeaturePageMethod();
         takeScr.takeScreenShot(Constants.PicturesFolderPath+"workersBeforeAdd.png");
-
+        //--------------------------------------------------------------------------------------------------------------
         GoToAddFeatureFormat newWorker = new GoToAddFeatureFormat(driver, "Create New Wokrer");
         newWorker.goToAddFeatureFormatMethod();
-
-
+        //--------------------------------------------------------------------------------------------------------------
         AddWorkerPage newWorkers = new AddWorkerPage(driver);
         newWorkers.addNewWorkerMethod(name, id, address, phoneNumber, email, company, dateOfStartingJob, dateOfFinishingJob, path);
         Thread.sleep(10000);
@@ -74,7 +73,7 @@ public class AddWorkerFlowTest {
 
         Thread.sleep(10000);
         takeScr.takeScreenShot(Constants.PicturesFolderPath+"workersAfterAdd.png");
-
+        //--------------------------------------------------------------------------------------------------------------
         int workerNumber = 2;
 
         this.WorkerName = driver.findElement(By.xpath("//*[@id=\"table-to-xls\"]/tbody/tr["+workerNumber+"]/th"));
@@ -90,7 +89,7 @@ public class AddWorkerFlowTest {
         assertEquals(phoneNumber, this.WorkerPhoneNumber.getText());
         assertEquals(email, this.workerEmail.getText());
         assertEquals(company, this.workerCompany.getText());
-
+        //--------------------------------------------------------------------------------------------------------------
         Thread.sleep(5000);
         ViewWorkerPage viewWorker = new ViewWorkerPage(driver, 2);
         viewWorker.viewWorkerMethod();

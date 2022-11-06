@@ -17,10 +17,7 @@ public class AddWorkerPage {
     WebElement image;
     WebElement addBtn;
 
-
-
     public AddWorkerPage(WebDriver driver) {
-
         this.workerName = driver.findElement(By.id("name"));
         this.workerID = driver.findElement(By.id("id"));
         this.workerAddress = driver.findElement(By.id("location"));
@@ -34,7 +31,6 @@ public class AddWorkerPage {
     }
 
     public void addNewWorkerMethod(String name, String id, String address, String phoneNumber, String email, String company, String dateOfStartingJob, String dateOfFinishingJob,String path) throws InterruptedException {
-
         this.workerName.sendKeys(name);
         this.workerID.sendKeys(id);
         this.workerAddress.sendKeys(address);
@@ -47,8 +43,6 @@ public class AddWorkerPage {
         this.image.sendKeys(file.getAbsolutePath());
         Thread.sleep(5000);
         this.addBtn.click();
-
-
     }
 }
 

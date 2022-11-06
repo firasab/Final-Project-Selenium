@@ -3,7 +3,6 @@ import core.WriteCsvFile;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,7 +27,6 @@ public class ViewJobApplicationPage {
     }
 
     public void getJobsApplicationPageMethod() throws InterruptedException {
-
         Thread.sleep(5000);
         String[] headers = new String[7];
         headers[0] = "PersonName";

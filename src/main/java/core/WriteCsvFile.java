@@ -1,12 +1,10 @@
 package core;
 
-
-        import java.io.File;
-        import java.io.FileWriter;
-        import java.io.IOException;
-        import java.util.List;
-
-        import com.opencsv.CSVWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.List;
+import com.opencsv.CSVWriter;
 
 public class WriteCsvFile {
     public static void writeDataLineByLine(String filePath, List<String[]> data, String[] headers)

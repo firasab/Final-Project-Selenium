@@ -4,7 +4,6 @@ import core.WriteCsvFile;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,7 +14,6 @@ public class getJobInformationPage { //getJobInformationPage
     WebElement PayPerHour;
     WebElement Address;
 
-
     public getJobInformationPage(WebDriver driver, int jobNumber) {
         this.company = driver.findElement(By.xpath("//*[@id=\"root\"]/div/div[2]/div/div/div/div/header["+jobNumber+"]/div/table/td[1]"));
         this.Discription = driver.findElement(By.xpath("//*[@id=\"root\"]/div/div[2]/div/div/div/div/header["+jobNumber+"]/div/table/td[2]"));
@@ -25,7 +23,6 @@ public class getJobInformationPage { //getJobInformationPage
     }
 
     public void getJobsPage() throws InterruptedException {
-
         Thread.sleep(5000);
         String[] headers = new String[5];
         headers[0] = "company";

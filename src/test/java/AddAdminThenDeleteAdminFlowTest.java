@@ -11,12 +11,10 @@ import pages.DeletePages.DeleteAdminPage;
 import pages.GoToPages.GoToAddFeatureFormat;
 import pages.GoToPages.GoToFeaturePage;
 import pages.LogIn.LoginPage;
-
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.List;
 import java.util.Properties;
-
 import static org.testng.AssertJUnit.assertEquals;
 
 
@@ -39,15 +37,14 @@ public class AddAdminThenDeleteAdminFlowTest {
 
     @Test(dataProvider = "getData")
     public void addAdminTest( String adminName, String adminEmail, String adminID, String adminFirstPassWord, String adminSecPassWord ) throws InterruptedException, IOException {
-
         FileReader readFile = new FileReader(Constants.ReadFolderPath+"props.properties");
         Properties prop = new Properties();
         prop.load(readFile);
         String Email = prop.getProperty("email");
         String Password = prop.getProperty("password");
-
+        //--------------------------------------------------------------------------------------------------------------
         WebDriver driver = OpenBrowsers.openBrowser("chrome");
-        driver.get("https://myjobs-1956b.web.app/login");
+        driver.get(Constants.LOGIN_URL);
         driver.manage().window().maximize();
         Thread.sleep(5000);
         LoginPage login = new LoginPage(driver);
@@ -55,18 +52,18 @@ public class AddAdminThenDeleteAdminFlowTest {
         Thread.sleep(10000);
         driver.switchTo().alert().accept();
         Thread.sleep(5000);
-
+        //--------------------------------------------------------------------------------------------------------------
         GoToFeaturePage gotoWorker = new GoToFeaturePage(driver, "Admins");
         gotoWorker.gotoFeaturePageMethod();
-
+        //--------------------------------------------------------------------------------------------------------------
         GoToAddFeatureFormat goToNewAdmin = new GoToAddFeatureFormat(driver, "Create New Admin");
         goToNewAdmin.goToAddFeatureFormatMethod();
-
+        //--------------------------------------------------------------------------------------------------------------
         AddAdminPage newAdmin = new AddAdminPage(driver);
         newAdmin.addAdminMethod( adminName,  adminEmail,  adminID,  adminFirstPassWord,  adminSecPassWord);
         Thread.sleep(10000);
         driver.switchTo().alert().accept();
-
+        //--------------------------------------------------------------------------------------------------------------
         Thread.sleep(5000);
         int adminNumber = 2;
 
@@ -75,7 +72,7 @@ public class AddAdminThenDeleteAdminFlowTest {
 
         assertEquals(adminName, this.Name.getText());
         assertEquals(adminEmail, this.Email.getText());
-
+        //--------------------------------------------------------------------------------------------------------------
         Thread.sleep(5000);
         DeleteAdminPage deleteAdmin = new DeleteAdminPage(driver, 2);
         deleteAdmin.deleteAdminMethod();

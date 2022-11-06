@@ -12,12 +12,10 @@ import pages.GoToPages.GoToAddFeatureFormat;
 import pages.GoToPages.GoToFeaturePage;
 import pages.LogIn.LoginPage;
 import pages.ViewPages.ViewCompanyPage;
-
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.List;
 import java.util.Properties;
-
 import static org.testng.AssertJUnit.assertEquals;
 
 
@@ -41,39 +39,30 @@ public class AddCompanyFlowTest {
 
     @Test(dataProvider = "getData")
     public void addCompanyTest( String companyName, String companyField, String companyNumberOfWorker, String companyAddress, String path) throws InterruptedException, IOException {
-
         FileReader readFile = new FileReader(Constants.ReadFolderPath+"props.properties");
         Properties prop = new Properties();
         prop.load(readFile);
         String Email = prop.getProperty("email");
         String Password = prop.getProperty("password");
-
+        //--------------------------------------------------------------------------------------------------------------
         WebDriver driver = OpenBrowsers.openBrowser("chrome");
         takeScr = new TakeScreenShot(driver);
         driver.get(Constants.LOGIN_URL);
         driver.manage().window().maximize();
         Thread.sleep(5000);
+        //--------------------------------------------------------------------------------------------------------------
         LoginPage login = new LoginPage(driver);
         login.loginMethod(Email, Password);
         Thread.sleep(10000);
         driver.switchTo().alert().accept();
         Thread.sleep(5000);
-
-        //jobs pagePath = Jobs
-        //companies pagePath = Companies
-        //admin pagePath = Admins
-        //createSchedule pagePath = Create Weekly Schedule
-        //jobForm pagePath = Check Jobs Forms
+        //--------------------------------------------------------------------------------------------------------------
         GoToFeaturePage gotoWorker = new GoToFeaturePage(driver, "Companies");
         gotoWorker.gotoFeaturePageMethod();
-
-        //linkTextPath of add company = Create New Copmany
-        //linkTextPath of add job = Create New Job
-
+        //--------------------------------------------------------------------------------------------------------------
         GoToAddFeatureFormat newWorker = new GoToAddFeatureFormat(driver, "Create New Copmany");
         newWorker.goToAddFeatureFormatMethod();
-
-
+        //--------------------------------------------------------------------------------------------------------------
         AddCompanyPage newCompany = new AddCompanyPage(driver);
         newCompany.addNewCompanyMethod( companyName, companyField, companyNumberOfWorker, companyAddress, path);
         Thread.sleep(10000);
@@ -81,7 +70,7 @@ public class AddCompanyFlowTest {
 
         Thread.sleep(10000);
         takeScr.takeScreenShot(Constants.PicturesFolderPath+"companies.png");
-
+        //--------------------------------------------------------------------------------------------------------------
         int jobNumber = 2;
 
         this.Name = driver.findElement(By.xpath("//*[@id=\"table-to-xls\"]/tbody/tr["+jobNumber+"]/th"));
@@ -93,14 +82,10 @@ public class AddCompanyFlowTest {
         assertEquals(companyField, this.Field.getText());
         assertEquals(companyNumberOfWorker, this.NumberOfWorker.getText());
         assertEquals(companyAddress, this.Address.getText());
-
+        //--------------------------------------------------------------------------------------------------------------
         Thread.sleep(5000);
         ViewCompanyPage viewCompany = new ViewCompanyPage(driver, 2);
         viewCompany.viewCompanyMethod();
-
-
-
-
     }
 
 

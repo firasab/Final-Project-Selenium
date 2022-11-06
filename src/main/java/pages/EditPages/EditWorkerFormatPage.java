@@ -1,12 +1,10 @@
 package pages.EditPages;
+
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
-
-
 import java.io.File;
 
 public class EditWorkerFormatPage {
-
     WebElement workerName;
     WebElement workerID;
     WebElement workerAddress;
@@ -16,12 +14,10 @@ public class EditWorkerFormatPage {
     WebElement dateOfFinishingJob;
     WebElement image;
     WebElement addBtn;
-
-
     WebDriver driver;
+
     public EditWorkerFormatPage(WebDriver driver) {
         this.driver = driver;
-
         workerName = driver.findElement(By.id("name"));
         workerID = driver.findElement(By.id("id"));
         workerAddress = driver.findElement(By.id("location"));
@@ -43,8 +39,6 @@ public class EditWorkerFormatPage {
     }
 
     public void editWorkerMethod(String name, String id, String address, String phoneNumber, String email, String company, String dateOfFinishing, String path) throws InterruptedException {
-
-
             ClearWorkerField(workerName);
             workerName.sendKeys(name);
 
@@ -70,7 +64,6 @@ public class EditWorkerFormatPage {
 
             Thread.sleep(5000);
             addBtn.click();
-
     }
 }
 

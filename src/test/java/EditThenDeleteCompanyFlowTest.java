@@ -13,12 +13,10 @@ import pages.EditPages.EditCompanyPage;
 import pages.GoToPages.GoToFeaturePage;
 import pages.LogIn.LoginPage;
 import pages.ViewPages.ViewCompanyPage;
-
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.List;
 import java.util.Properties;
-
 import static org.testng.AssertJUnit.assertEquals;
 
 
@@ -27,7 +25,6 @@ public class EditThenDeleteCompanyFlowTest {
     TakeScreenShot takeScr;
     @DataProvider
     public static Object[][] getData() throws Exception{
-
         List<String[]> lines = ReadCsvFile.readAllLines(Constants.ReadFolderPath+"editCompanyInformation.csv");
         lines.remove(0);
         Object[][] data = new Object[lines.size()][lines.get(0).length];
@@ -42,39 +39,30 @@ public class EditThenDeleteCompanyFlowTest {
 
     @Test (dataProvider = "getData")
     public void editCompanyTest(String companyName, String companyField, String companyNumberOfWorker, String companyAddress, String path ) throws InterruptedException, IOException {
-
         FileReader readFile = new FileReader(Constants.ReadFolderPath+"props.properties");
         Properties prop = new Properties();
         prop.load(readFile);
         String Email = prop.getProperty("email");
         String Password = prop.getProperty("password");
-
+        //--------------------------------------------------------------------------------------------------------------
         WebDriver driver = OpenBrowsers.openBrowser("chrome");
         takeScr = new TakeScreenShot(driver);
         driver.get(Constants.LOGIN_URL);
         driver.manage().window().maximize();
         Thread.sleep(5000);
+        //--------------------------------------------------------------------------------------------------------------
         LoginPage login = new LoginPage(driver);
         login.loginMethod(Email, Password);
         Thread.sleep(10000);
         driver.switchTo().alert().accept();
         Thread.sleep(5000);
-
-        //jobs pagePath = Jobs
-        //companies pagePath = Companies
-        //admin pagePath = Admins
-        //createSchedule pagePath = Create Weekly Schedule
-        //jobForm pagePath = Check Jobs Forms
+        //--------------------------------------------------------------------------------------------------------------
         GoToFeaturePage gotoWorker = new GoToFeaturePage(driver, "Companies");
         gotoWorker.gotoFeaturePageMethod();
-
-        //linkTextPath of add company = Create New Copmany
-        //linkTextPath of add job = Create New Job
-
+        //--------------------------------------------------------------------------------------------------------------
         EditCompanyPage editCompany = new EditCompanyPage(driver, 2);
         editCompany.editCompanyMethod();
-
-
+        //--------------------------------------------------------------------------------------------------------------
         EditCompanyFormatPage editCompany1 = new EditCompanyFormatPage(driver);
         editCompany1.editCompanyMethod(companyName, companyField, companyNumberOfWorker, companyAddress, path);
         Thread.sleep(10000);
@@ -82,7 +70,7 @@ public class EditThenDeleteCompanyFlowTest {
 
         Thread.sleep(10000);
         takeScr.takeScreenShot(Constants.PicturesFolderPath+"editCompanies.png");
-
+        //--------------------------------------------------------------------------------------------------------------
         int jobNumber = 2;
 
         this.Name = driver.findElement(By.xpath("//*[@id=\"table-to-xls\"]/tbody/tr["+jobNumber+"]/th"));
@@ -94,21 +82,19 @@ public class EditThenDeleteCompanyFlowTest {
         assertEquals(companyField, this.Field.getText());
         assertEquals(companyNumberOfWorker, this.NumberOfWorker.getText());
         assertEquals(companyAddress, this.Address.getText());
-
+        //--------------------------------------------------------------------------------------------------------------
         Thread.sleep(5000);
         ViewCompanyPage viewCompany = new ViewCompanyPage(driver, 2);
         viewCompany.viewCompanyMethod();
-
+        //--------------------------------------------------------------------------------------------------------------
         Thread.sleep(5000);
         GoToFeaturePage gotoDeleteCompany = new GoToFeaturePage(driver, "Companies");
         gotoDeleteCompany.gotoFeaturePageMethod();
-
+        //--------------------------------------------------------------------------------------------------------------
         DeleteCompanyPage deleteCompany = new DeleteCompanyPage(driver, 2);
         deleteCompany.deleteCompanyMethod();
         Thread.sleep(5000);
         driver.switchTo().alert().accept();
-
-
     }
 
 

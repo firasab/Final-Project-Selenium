@@ -19,9 +19,6 @@ public class LoginPage {
         this.email.sendKeys(email);
         this.password.sendKeys(password);
         this.loginBtn.click();
-
-
-
     }
 }
 

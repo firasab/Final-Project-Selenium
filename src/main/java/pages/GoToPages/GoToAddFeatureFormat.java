@@ -7,8 +7,6 @@ import org.openqa.selenium.WebElement;
 public class GoToAddFeatureFormat {
     WebElement Create_New_Feature;
 
-
-
     public GoToAddFeatureFormat(WebDriver driver, String linkTextPath) {
         this.Create_New_Feature = driver.findElement(By.linkText(linkTextPath));
     }

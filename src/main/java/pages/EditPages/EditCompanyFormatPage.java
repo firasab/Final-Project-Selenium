@@ -5,24 +5,19 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
-
 import java.io.File;
 
 public class EditCompanyFormatPage {
-
     WebElement companyName;
     WebElement field;
     WebElement numberOfWorker;
     WebElement address;
-
     WebElement image;
     WebElement addBtn;
-
-
     WebDriver driver;
+
     public EditCompanyFormatPage(WebDriver driver) {
         this.driver = driver;
-
         companyName = driver.findElement(By.id("companyName"));
         field = driver.findElement(By.id("field"));
         numberOfWorker = driver.findElement(By.id("numberOfWorker"));
@@ -41,8 +36,6 @@ public class EditCompanyFormatPage {
     }
 
     public void editCompanyMethod(String companyName, String field, String numberOfWorker, String address, String path) throws InterruptedException {
-
-
             ClearCompanyField(this.companyName);
             this.companyName.sendKeys(companyName);
 
@@ -60,7 +53,6 @@ public class EditCompanyFormatPage {
 
             Thread.sleep(5000);
             addBtn.click();
-
     }
 }
 
