@@ -1,5 +1,6 @@
 package pages.SendEmail;
 
+import core.Constants;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -9,7 +10,7 @@ public class EmailSenderPage {
 
 
     public EmailSenderPage(WebDriver driver) {
-        this.addBtn = driver.findElement(By.xpath("//*[@id=\"root\"]/div/div[2]/div/div/div/div/div/header/div/form/button"));
+        this.addBtn = driver.findElement(By.xpath(Constants.SEND_EMAIL_XPATH_BTN));
     }
 
     public void emailSenderPageMethod(){

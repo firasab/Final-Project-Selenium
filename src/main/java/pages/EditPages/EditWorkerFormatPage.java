@@ -1,5 +1,6 @@
 package pages.EditPages;
 
+import core.Constants;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import java.io.File;
@@ -25,8 +26,8 @@ public class EditWorkerFormatPage {
         workerEmail = driver.findElement(By.id("email"));
         workerCompany = driver.findElement(By.id("companyName"));
         dateOfFinishingJob = driver.findElement(By.id("mui-3"));
-        image = driver.findElement(By.xpath("//*[@id=\"root\"]/div/div[2]/div/div/div/div/div/header/div/div[8]/input"));
-        addBtn = driver.findElement(By.xpath("//*[@id=\"root\"]/div/div[2]/div/div/div/div/div/header/div/button"));
+        image = driver.findElement(By.xpath(Constants.EDIT_WORKER_XPATH_IMG));
+        addBtn = driver.findElement(By.xpath(Constants.EDIT_WORKER_XPATH_BTN));
     }
 
     public void ClearWorkerField(WebElement worker) {

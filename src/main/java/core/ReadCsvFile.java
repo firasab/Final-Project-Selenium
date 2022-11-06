@@ -11,7 +11,6 @@ public class ReadCsvFile {
         CSVReader reader = new CSVReader(new FileReader(filePath), ',');
 
         List<String[]> data = new ArrayList<String[]>();
-
         // read line by line
         String[] record = null;
 
@@ -21,10 +20,5 @@ public class ReadCsvFile {
         }
         reader.close();
         return data;
-    }
-
-    public static void main(String[] args) throws Exception {
-        List<String[]> data = ReadCsvFile.readAllLines("input.csv");
-        System.out.println("test");
     }
 }

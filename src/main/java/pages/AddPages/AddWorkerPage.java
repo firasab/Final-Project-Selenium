@@ -1,5 +1,6 @@
 package pages.AddPages;
 
+import core.Constants;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -26,8 +27,8 @@ public class AddWorkerPage {
         this.workerCompany = driver.findElement(By.id("companyName"));
         this.dateOfStartingJob = driver.findElement(By.id("mui-5"));
         this.dateOfFinishingJob = driver.findElement(By.id("mui-6"));
-        this.image = driver.findElement(By.xpath("//*[@id=\"root\"]/div/div[2]/div/div/div/div/div/header/div/div[9]/input"));
-        this.addBtn = driver.findElement(By.xpath("//*[@id=\"root\"]/div/div[2]/div/div/div/div/div/header/div/button"));
+        this.image = driver.findElement(By.xpath(Constants.ADD_WORKER_XPATH_IMG));
+        this.addBtn = driver.findElement(By.xpath(Constants.ADD_WORKER_XPATH_BTN));
     }
 
     public void addNewWorkerMethod(String name, String id, String address, String phoneNumber, String email, String company, String dateOfStartingJob, String dateOfFinishingJob,String path) throws InterruptedException {

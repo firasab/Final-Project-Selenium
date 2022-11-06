@@ -18,14 +18,14 @@ public class GetSearchInformationPage {
     WebElement FinishedWorkingAt;
 
     public GetSearchInformationPage(WebDriver driver) {
-        this.name = driver.findElement(By.xpath("//*[@id=\"table-to-xls\"]/tbody/tr/th"));
-        this.ID = driver.findElement(By.xpath("//*[@id=\"table-to-xls\"]/tbody/tr/td[1]"));
-        this.Location = driver.findElement(By.xpath("//*[@id=\"table-to-xls\"]/tbody/tr/td[2]"));
-        this.PhoneNumber = driver.findElement(By.xpath("//*[@id=\"table-to-xls\"]/tbody/tr/td[3]"));
-        this.Email = driver.findElement(By.xpath("//*[@id=\"table-to-xls\"]/tbody/tr/td[4]"));
-        this.Company = driver.findElement(By.xpath("//*[@id=\"table-to-xls\"]/tbody/tr/td[5]"));
-        this.StartedWorkingAt = driver.findElement(By.xpath("//*[@id=\"table-to-xls\"]/tbody/tr/td[6]"));
-        this.FinishedWorkingAt = driver.findElement(By.xpath("//*[@id=\"table-to-xls\"]/tbody/tr/td[7]"));
+        this.name = driver.findElement(By.xpath(Constants.SEARCHED_NAME_XPATH));
+        this.ID = driver.findElement(By.xpath(Constants.SEARCHED_ID_XPATH));
+        this.Location = driver.findElement(By.xpath(Constants.SEARCHED_LOCATION_XPATH));
+        this.PhoneNumber = driver.findElement(By.xpath(Constants.SEARCHED_PHONE_NUMBER_XPATH));
+        this.Email = driver.findElement(By.xpath(Constants.SEARCHED_EMAIL_XPATH));
+        this.Company = driver.findElement(By.xpath(Constants.SEARCHED_COMPANY_XPATH));
+        this.StartedWorkingAt = driver.findElement(By.xpath(Constants.SEARCHED_START_WORK_DATE_XPATH));
+        this.FinishedWorkingAt = driver.findElement(By.xpath(Constants.SEARCHED_FINISH_WORK_DATE_XPATH));
     }
 
     public void getSearched() throws InterruptedException {

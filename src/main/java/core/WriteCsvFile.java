@@ -7,9 +7,7 @@ import java.util.List;
 import com.opencsv.CSVWriter;
 
 public class WriteCsvFile {
-    public static void writeDataLineByLine(String filePath, List<String[]> data, String[] headers)
-    {
-
+    public static void writeDataLineByLine(String filePath, List<String[]> data, String[] headers) {
         File file = new File(filePath);
         try {
             FileWriter outputfile = new FileWriter(file);

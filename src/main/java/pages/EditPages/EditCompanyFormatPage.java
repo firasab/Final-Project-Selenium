@@ -1,5 +1,6 @@
 package pages.EditPages;
 
+import core.Constants;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
@@ -22,8 +23,8 @@ public class EditCompanyFormatPage {
         field = driver.findElement(By.id("field"));
         numberOfWorker = driver.findElement(By.id("numberOfWorker"));
         address = driver.findElement(By.id("address"));
-        image = driver.findElement(By.xpath("//*[@id=\"root\"]/div/div[2]/div/div/div/div/div/header/div/div[5]/input"));
-        addBtn = driver.findElement(By.xpath("//*[@id=\"root\"]/div/div[2]/div/div/div/div/div/header/div/button"));
+        image = driver.findElement(By.xpath(Constants.EDIT_COMPANY_XPATH_IMG));
+        addBtn = driver.findElement(By.xpath(Constants.EDIT_COMPANY_XPATH_BTN));
     }
 
     public void ClearCompanyField(WebElement worker) {

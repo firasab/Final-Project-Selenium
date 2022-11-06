@@ -17,14 +17,10 @@ public class TakeScreenShot {
         File SrcFile=scrShot.getScreenshotAs(OutputType.FILE);
 
         //Move image file to new destination
-
         File DestFile=new File(filePath);
 
         //Copy file at destination
-
         FileUtils.copyFile(SrcFile, DestFile);
         Allure.addAttachment("Screenshot", FileUtils.openInputStream(SrcFile));
-
-
     }
 }

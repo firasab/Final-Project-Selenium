@@ -11,19 +11,15 @@ public class OpenBrowsers {
         WebDriver driver;
         if(browser.equals("firefox")) {
             //Setting webdriver.gecko.driver property
-            System.setProperty("webdriver.gecko.driver", "src/main/resources/geckodriver.exe");
-
+            System.setProperty(Constants.FIRE_FOX_DRIVER, Constants.FIRE_FOX_DRIVER_PATH);
             //Instantiating driver object and launching browser
             driver = new FirefoxDriver();
         }else if(browser.equals("chrome")) {
-            System.setProperty("webdriver.chrome.driver", "src/main/resources/chromedriver.exe");
-
+            System.setProperty( Constants.CHROME_DRIVER, Constants.CHROME_DRIVER_PATH);
             //Instantiating driver object
             driver = new ChromeDriver();
         }else if(browser.equals("edge")) {
-            System.setProperty(
-                    "webdriver.edge.driver",
-                    "src/main/resources/msedgedriver.exe");
+            System.setProperty( Constants.EDGE_DRIVER, Constants.EDGE_DRIVER_PATH);
             // Instantiate a ChromeDriver class.
             driver = new EdgeDriver();
         }else {
@@ -31,22 +27,5 @@ public class OpenBrowsers {
         }
 
         return driver;
-    }
-
-    public static void main(String[] args) throws InterruptedException {
-        String[] browsers = {"chrome","firefox","edge"};
-        for(int i =0;i<browsers.length;i++) {
-            WebDriver driver = OpenBrowsers.openBrowser(browsers[i]);
-            driver.manage().window().maximize();
-            driver.get("https://www.google.com/");
-            Thread.sleep(5000);
-            driver.get("https://www.bing.com/");
-            Thread.sleep(5000);
-            driver.navigate().back();
-            Thread.sleep(5000);
-            driver.navigate().forward();
-            Thread.sleep(10000);
-            driver.quit();
-        }
     }
 }

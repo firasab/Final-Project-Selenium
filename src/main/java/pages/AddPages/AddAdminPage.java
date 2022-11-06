@@ -1,5 +1,6 @@
 package pages.AddPages;
 
+import core.Constants;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -19,7 +20,7 @@ public class AddAdminPage {
         adminID = driver.findElement(By.id("id"));
         adminFirstPassWord = driver.findElement(By.id("password1"));
         adminSecPassWord = driver.findElement(By.id("password2"));
-        addBtn = driver.findElement(By.xpath("//*[@id=\"root\"]/div/div[2]/div/form/div/div[2]/div/div[3]/button"));
+        addBtn = driver.findElement(By.xpath(Constants.ADD_ADMIN_XPATH_BTN));
     }
 
     public void addAdminMethod(String adminName, String adminEmail, String adminID, String adminFirstPassWord, String adminSecPassWord) throws InterruptedException {

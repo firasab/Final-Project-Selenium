@@ -1,5 +1,6 @@
 package pages.ApplyForJob;
 
+import core.Constants;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -25,8 +26,8 @@ public class ApplyToJobFormatPage {
         this.address = driver.findElement(By.id("address"));
         this.email = driver.findElement(By.id("email"));
         this.description = driver.findElement(By.id("description"));
-        this.image = driver.findElement(By.xpath("//*[@id=\"input\"]"));
-        this.addBtn = driver.findElement(By.xpath("//*[@id=\"root\"]/div/div[2]/div/div/div/div/div/header/div/button"));
+        this.image = driver.findElement(By.xpath(Constants.APPLY_TO_JOB_XPATH_IMG));
+        this.addBtn = driver.findElement(By.xpath(Constants.APPLY_TO_JOB_XPATH_BTN));
     }
 
     public void applyToJobFormatPageMethod(String name, String jobName, String id, String phone, String address, String email, String description, String path) throws InterruptedException {

@@ -1,5 +1,6 @@
 package pages.EditPages;
 
+import core.Constants;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
@@ -24,8 +25,8 @@ public class EditJobFormatPage {
         position = driver.findElement(By.id("position"));
         payPerHour = driver.findElement(By.id("payPerHour"));
         address = driver.findElement(By.id("address"));
-        image = driver.findElement(By.xpath("//*[@id=\"root\"]/div/div[2]/div/div/div/div/div/header/div/div[6]/input"));
-        addBtn = driver.findElement(By.xpath("//*[@id=\"root\"]/div/div[2]/div/div/div/div/div/header/div/button"));
+        image = driver.findElement(By.xpath(Constants.EDIT_JOB_XPATH_IMG));
+        addBtn = driver.findElement(By.xpath(Constants.EDIT_JOB_XPATH_BTN));
     }
 
     public void ClearJobField(WebElement worker) {
