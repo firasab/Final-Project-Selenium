@@ -1,5 +1,6 @@
 package pages.EditPages;
 
+import core.ClearField;
 import core.Constants;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
@@ -30,41 +31,35 @@ public class EditWorkerFormatPage {
         addBtn = driver.findElement(By.xpath(Constants.EDIT_WORKER_XPATH_BTN));
     }
 
-    public void ClearWorkerField(WebElement worker) {
-        Actions actions = new Actions(driver);
-        worker.click();
-        actions.keyDown(Keys.CONTROL);
-        actions.sendKeys("a");
-        actions.keyUp(Keys.CONTROL);
-        actions.build().perform();
-    }
 
     public void editWorkerMethod(String name, String id, String address, String phoneNumber, String email, String company, String dateOfFinishing, String path) throws InterruptedException {
-            ClearWorkerField(workerName);
-            workerName.sendKeys(name);
+        Thread.sleep(1000);
+        ClearField clear = new ClearField();
+        clear.ClearCompanyField(this.workerName, driver);
+        workerName.sendKeys(name);
 
-            ClearWorkerField(workerID);
-            workerID.sendKeys(id);
+        clear.ClearCompanyField(this.workerID, driver);
+        workerID.sendKeys(id);
 
-            ClearWorkerField(workerAddress);
-            workerAddress.sendKeys(address);
+        clear.ClearCompanyField(this.workerAddress, driver);
+        workerAddress.sendKeys(address);
 
-            ClearWorkerField(workerPhoneNumber);
-            workerPhoneNumber.sendKeys(phoneNumber);
+        clear.ClearCompanyField(this.workerPhoneNumber, driver);
+        workerPhoneNumber.sendKeys(phoneNumber);
 
-            ClearWorkerField(workerEmail);
-            workerEmail.sendKeys(email);
+        clear.ClearCompanyField(this.workerEmail, driver);
+        workerEmail.sendKeys(email);
 
-            ClearWorkerField(workerCompany);
-            workerCompany.sendKeys(company);
+        clear.ClearCompanyField(this.workerCompany, driver);
+        workerCompany.sendKeys(company);
 
-            dateOfFinishingJob.sendKeys(dateOfFinishing);
+        dateOfFinishingJob.sendKeys(dateOfFinishing);
 
-            File file = new File(path);
-            image.sendKeys(file.getAbsolutePath());
+        File file = new File(path);
+        image.sendKeys(file.getAbsolutePath());
 
-            Thread.sleep(5000);
-            addBtn.click();
+        Thread.sleep(5000);
+        addBtn.click();
     }
 }
 

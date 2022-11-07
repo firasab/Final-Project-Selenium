@@ -1,5 +1,6 @@
 package pages.EditPages;
 
+import core.ClearField;
 import core.Constants;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
@@ -27,33 +28,26 @@ public class EditCompanyFormatPage {
         addBtn = driver.findElement(By.xpath(Constants.EDIT_COMPANY_XPATH_BTN));
     }
 
-    public void ClearCompanyField(WebElement worker) {
-        Actions actions = new Actions(driver);
-        worker.click();
-        actions.keyDown(Keys.CONTROL);
-        actions.sendKeys("a");
-        actions.keyUp(Keys.CONTROL);
-        actions.build().perform();
-    }
 
     public void editCompanyMethod(String companyName, String field, String numberOfWorker, String address, String path) throws InterruptedException {
-            ClearCompanyField(this.companyName);
-            this.companyName.sendKeys(companyName);
+        ClearField clear = new ClearField();
+        clear.ClearCompanyField(this.companyName, driver);
+        this.companyName.sendKeys(companyName);
 
-            ClearCompanyField(this.field);
-            this.field.sendKeys(field);
+        clear.ClearCompanyField(this.field, driver);
+        this.field.sendKeys(field);
 
-            ClearCompanyField(this.numberOfWorker);
-            this.numberOfWorker.sendKeys(numberOfWorker);
+        clear.ClearCompanyField(this.numberOfWorker, driver);
+        this.numberOfWorker.sendKeys(numberOfWorker);
 
-            ClearCompanyField(this.address);
-            this.address.sendKeys(address);
+        clear.ClearCompanyField(this.address, driver);
+        this.address.sendKeys(address);
 
-            File file = new File(path);
-            image.sendKeys(file.getAbsolutePath());
+        File file = new File(path);
+        image.sendKeys(file.getAbsolutePath());
 
-            Thread.sleep(5000);
-            addBtn.click();
+        Thread.sleep(5000);
+        addBtn.click();
     }
 }
 
