@@ -4,6 +4,8 @@ import core.WriteCsvFile;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,7 +24,7 @@ public class getJobInformationPage { //getJobInformationPage
         this.Address = driver.findElement(By.xpath("//*[@id=\"root\"]/div/div[2]/div/div/div/div/header["+jobNumber+"]/div/table/td[5]"));
     }
 
-    public void getJobsPage() throws InterruptedException {
+    public void getJobsPage() throws InterruptedException, IOException {
         Thread.sleep(5000);
         String[] headers = new String[5];
         headers[0] = "company";
@@ -40,5 +42,6 @@ public class getJobInformationPage { //getJobInformationPage
         List<String[]> data = new ArrayList<String[]>();
         data.add(website_data);
         WriteCsvFile.writeDataLineByLine(Constants.WriteFolderPath+"jobsInfo.csv", data, headers);
+        WriteCsvFile.attachCsv(Constants.WriteFolderPath+"jobsInfo.csv","jobsInfo.csv");
     }
 }

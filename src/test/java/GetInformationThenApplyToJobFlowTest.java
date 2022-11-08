@@ -46,6 +46,7 @@ public class GetInformationThenApplyToJobFlowTest {
         List<String[]> data = new ArrayList<String[]>();
         data.add(website_data);
         WriteCsvFile.writeDataLineByLine(Constants.WriteFolderPath+"webInfo.csv", data, headers);
+        WriteCsvFile.attachCsv(Constants.WriteFolderPath+"webInfo.csv","webInfo.csv");
 
         takeScr.takeScreenShot(Constants.PicturesFolderPath+"AboutUS.png");
         Thread.sleep(5000);

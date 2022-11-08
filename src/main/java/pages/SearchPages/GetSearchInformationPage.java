@@ -4,6 +4,8 @@ import core.WriteCsvFile;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,7 +30,7 @@ public class GetSearchInformationPage {
         this.FinishedWorkingAt = driver.findElement(By.xpath(Constants.SEARCHED_FINISH_WORK_DATE_XPATH));
     }
 
-    public void getSearched() throws InterruptedException {
+    public void getSearched() throws InterruptedException, IOException {
 
         Thread.sleep(5000);
         String[] headers = new String[8];
@@ -53,5 +55,6 @@ public class GetSearchInformationPage {
         List<String[]> data = new ArrayList<String[]>();
         data.add(website_data);
         WriteCsvFile.writeDataLineByLine(Constants.WriteFolderPath+"SearchInfo.csv", data, headers);
+        WriteCsvFile.attachCsv(Constants.WriteFolderPath+"SearchInfo.csv","SearchInfo.csv");
     }
 }

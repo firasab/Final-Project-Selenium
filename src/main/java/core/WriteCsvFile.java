@@ -1,10 +1,11 @@
 package core;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.List;
 import com.opencsv.CSVWriter;
+import io.qameta.allure.Allure;
 
 public class WriteCsvFile {
     public static void writeDataLineByLine(String filePath, List<String[]> data, String[] headers) {
@@ -24,6 +25,15 @@ public class WriteCsvFile {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
+
+
+    }
+    public static void attachCsv(String filePath, String fileName) throws IOException {
+        byte[] array = Files.readAllBytes(Paths.get(filePath));
+        ByteArrayOutputStream attachmentContent = new ByteArrayOutputStream();
+        attachmentContent.write(array);
+
+        Allure.addAttachment(fileName, "text/csv", new ByteArrayInputStream(attachmentContent.toByteArray()), ".csv");
     }
 
 
