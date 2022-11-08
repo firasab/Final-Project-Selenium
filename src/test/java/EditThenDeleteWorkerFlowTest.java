@@ -1,5 +1,4 @@
 import core.Constants;
-import core.OpenBrowsers;
 import core.ReadCsvFile;
 import core.TakeScreenShot;
 import org.openqa.selenium.By;
@@ -11,12 +10,9 @@ import pages.DeletePages.DeleteWorkerPage;
 import pages.EditPages.EditWorkerFormatPage;
 import pages.EditPages.EditWorkerPage;
 import pages.GoToPages.GoToFeaturePage;
-import pages.LogIn.LoginPage;
 import pages.ViewPages.ViewWorkerPage;
-import java.io.FileReader;
 import java.io.IOException;
 import java.util.List;
-import java.util.Properties;
 import static org.testng.AssertJUnit.assertEquals;
 
 
@@ -38,23 +34,7 @@ public class EditThenDeleteWorkerFlowTest {
 
     @Test (dataProvider = "getData")
     public void editWorkerTest( String name, String id, String address, String phoneNumber, String email, String company, String dateOfFinishingJob ,String path) throws InterruptedException, IOException {
-        FileReader readFile = new FileReader(Constants.ReadFolderPath+"props.properties");
-        Properties prop = new Properties();
-        prop.load(readFile);
-        String Email = prop.getProperty("email");
-        String Password = prop.getProperty("password");
-        //--------------------------------------------------------------------------------------------------------------
-        WebDriver driver = OpenBrowsers.openBrowser("chrome");
-        takeScr = new TakeScreenShot(driver);
-        driver.get(Constants.LOGIN_URL);
-        driver.manage().window().maximize();
-        Thread.sleep(5000);
-        //--------------------------------------------------------------------------------------------------------------
-        LoginPage login = new LoginPage(driver);
-        login.loginMethod(Email, Password);
-        Thread.sleep(10000);
-        driver.switchTo().alert().accept();
-        Thread.sleep(5000);
+        WebDriver driver = BaseTest.Login();
         //--------------------------------------------------------------------------------------------------------------
         GoToFeaturePage gotoWorker = new GoToFeaturePage(driver, "Workers");
         gotoWorker.gotoFeaturePageMethod();

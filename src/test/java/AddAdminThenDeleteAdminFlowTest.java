@@ -1,5 +1,4 @@
 import core.Constants;
-import core.OpenBrowsers;
 import core.ReadCsvFile;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -10,11 +9,8 @@ import pages.AddPages.AddAdminPage;
 import pages.DeletePages.DeleteAdminPage;
 import pages.GoToPages.GoToAddFeatureFormat;
 import pages.GoToPages.GoToFeaturePage;
-import pages.LogIn.LoginPage;
-import java.io.FileReader;
 import java.io.IOException;
 import java.util.List;
-import java.util.Properties;
 import static org.testng.AssertJUnit.assertEquals;
 
 
@@ -37,32 +33,22 @@ public class AddAdminThenDeleteAdminFlowTest {
 
     @Test(dataProvider = "getData")
     public void addAdminTest( String adminName, String adminEmail, String adminID, String adminFirstPassWord, String adminSecPassWord ) throws InterruptedException, IOException {
-        FileReader readFile = new FileReader(Constants.ReadFolderPath+"props.properties");
-        Properties prop = new Properties();
-        prop.load(readFile);
-        String Email = prop.getProperty("email");
-        String Password = prop.getProperty("password");
+        WebDriver driver = BaseTest.Login();
         //--------------------------------------------------------------------------------------------------------------
-        WebDriver driver = OpenBrowsers.openBrowser("chrome");
-        driver.get(Constants.LOGIN_URL);
-        driver.manage().window().maximize();
-        Thread.sleep(5000);
-        LoginPage login = new LoginPage(driver);
-        login.loginMethod(Email, Password);
-        Thread.sleep(10000);
-        driver.switchTo().alert().accept();
-        Thread.sleep(5000);
-        //--------------------------------------------------------------------------------------------------------------
-        GoToFeaturePage gotoWorker = new GoToFeaturePage(driver, "Admins");
-        gotoWorker.gotoFeaturePageMethod();
+        GoToFeaturePage gotoAdmin = new GoToFeaturePage(driver, "Admins");
+        gotoAdmin.gotoFeaturePageMethod();
         //--------------------------------------------------------------------------------------------------------------
         GoToAddFeatureFormat goToNewAdmin = new GoToAddFeatureFormat(driver, "Create New Admin");
         goToNewAdmin.goToAddFeatureFormatMethod();
         //--------------------------------------------------------------------------------------------------------------
+        Thread.sleep(5000);
         AddAdminPage newAdmin = new AddAdminPage(driver);
         newAdmin.addAdminMethod( adminName,  adminEmail,  adminID,  adminFirstPassWord,  adminSecPassWord);
         Thread.sleep(10000);
         driver.switchTo().alert().accept();
+        //--------------------------------------------------------------------------------------------------------------
+        GoToFeaturePage gotoAdmin2 = new GoToFeaturePage(driver, "Admins");
+        gotoAdmin2.gotoFeaturePageMethod();
         //--------------------------------------------------------------------------------------------------------------
         Thread.sleep(5000);
         int adminNumber = 2;

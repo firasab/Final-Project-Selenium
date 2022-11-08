@@ -1,5 +1,4 @@
 import core.Constants;
-import core.OpenBrowsers;
 import core.ReadCsvFile;
 import core.TakeScreenShot;
 import org.openqa.selenium.By;
@@ -10,12 +9,9 @@ import org.testng.annotations.Test;
 import pages.AddPages.AddJobPage;
 import pages.GoToPages.GoToAddFeatureFormat;
 import pages.GoToPages.GoToFeaturePage;
-import pages.LogIn.LoginPage;
 import pages.ViewPages.ViewJobPage;
-import java.io.FileReader;
 import java.io.IOException;
 import java.util.List;
-import java.util.Properties;
 import static org.testng.AssertJUnit.assertEquals;
 
 
@@ -39,23 +35,8 @@ public class AddJobFlowTest {
 
     @Test(dataProvider = "getData")
     public void addJobTest(String jobName, String jobDiscription, String jobPosition, String jobPayPerHour , String jobAddress, String path) throws InterruptedException, IOException {
-        FileReader readFile = new FileReader(Constants.ReadFolderPath+"props.properties");
-        Properties prop = new Properties();
-        prop.load(readFile);
-        String Email = prop.getProperty("email");
-        String Password = prop.getProperty("password");
-        //--------------------------------------------------------------------------------------------------------------
-        WebDriver driver = OpenBrowsers.openBrowser("chrome");
+        WebDriver driver = BaseTest.Login();
         takeScr = new TakeScreenShot(driver);
-        driver.get(Constants.LOGIN_URL);
-        driver.manage().window().maximize();
-        Thread.sleep(5000);
-        //--------------------------------------------------------------------------------------------------------------
-        LoginPage login = new LoginPage(driver);
-        login.loginMethod(Email, Password);
-        Thread.sleep(10000);
-        driver.switchTo().alert().accept();
-        Thread.sleep(5000);
         //--------------------------------------------------------------------------------------------------------------
         GoToFeaturePage gotoWorker = new GoToFeaturePage(driver, "Jobs");
         gotoWorker.gotoFeaturePageMethod();
@@ -71,6 +52,7 @@ public class AddJobFlowTest {
         Thread.sleep(10000);
         takeScr.takeScreenShot(Constants.PicturesFolderPath+"jobs.png");
         //--------------------------------------------------------------------------------------------------------------
+        Thread.sleep(5000);
         int jobNumber = 3;
 
         this.Name = driver.findElement(By.xpath("//*[@id=\"table-to-xls\"]/tbody/tr["+jobNumber+"]/th"));

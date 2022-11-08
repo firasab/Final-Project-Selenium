@@ -67,13 +67,14 @@ public class Constants {
     //-------------------------------------------------------------------------
     public static String SEARCHED_COMPANY_XPATH = "//*[@id=\"table-to-xls\"]/tbody/tr/td[5]";
     //-------------------------------------------------------------------------
-    public static String SEARCHED_START_WORK_DATE_XPATH = "//*[@id=\"table-to-xls\"]/tbody/tr/td[6]]";
+    public static String SEARCHED_START_WORK_DATE_XPATH = "//*[@id=\"table-to-xls\"]/tbody/tr/td[6]";
     //-------------------------------------------------------------------------
     public static String SEARCHED_FINISH_WORK_DATE_XPATH = "//*[@id=\"table-to-xls\"]/tbody/tr/td[7]";
     //-------------------------------------------------------------------------
     public static String SEARCH_FIELD_XPATH = "//*[@id=\"root\"]/div/div[2]/div/div/div/div/div/header/div[2]/div/div/input";
     //-------------------------------------------------------------------------
     public static String SEND_EMAIL_XPATH_BTN = "//*[@id=\"root\"]/div/div[2]/div/div/div/div/div/header/div/form/button";
+
 
 
 }

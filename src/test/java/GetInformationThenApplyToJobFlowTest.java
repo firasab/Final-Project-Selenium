@@ -29,8 +29,6 @@ public class GetInformationThenApplyToJobFlowTest {
         return data;
     }
 
-
-
     @Test(dataProvider = "getData")
     public void getAboutUsTest(String name, String jobName, String id, String phone, String address, String email, String description, String path) throws InterruptedException, IOException {
         WebDriver driver = OpenBrowsers.openBrowser("chrome");
