@@ -1,5 +1,6 @@
 import core.*;
 
+import io.qameta.allure.Allure;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -31,12 +32,15 @@ public class GetInformationThenApplyToJobFlowTest {
 
     @Test(dataProvider = "getData")
     public void getAboutUsTest(String name, String jobName, String id, String phone, String address, String email, String description, String path) throws InterruptedException, IOException {
+        Allure.step("Step1: Open the browser");
         WebDriver driver = OpenBrowsers.openBrowser("chrome");
         takeScr = new TakeScreenShot(driver);
+        Allure.step("Step2: go to the website");
         driver.get(Constants.AboutUS_URL);
         driver.manage().window().maximize();
         Thread.sleep(5000);
         //---------------------------------------------------------------------------------------------------------------------------
+        Allure.step("Step3: get information about the website");
         informationParagraph = driver.findElement(By.xpath("//*[@id=\"root\"]/div/div[2]"));
         String[] headers = new String[1];
         headers[0] = "Website Information";
@@ -51,17 +55,21 @@ public class GetInformationThenApplyToJobFlowTest {
         takeScr.takeScreenShot(Constants.PicturesFolderPath+"AboutUS.png");
         Thread.sleep(5000);
         //---------------------------------------------------------------------------------------------------------------------------
+        Allure.step("Step4: go to Jobs Page");
         GoToFeaturePage gotoApplyToJob = new GoToFeaturePage(driver, "Jobs");
         gotoApplyToJob.gotoFeaturePageMethod();
         //---------------------------------------------------------------------------------------------------------------------------
+        Allure.step("Step5: get information about one of the jobs");
         Thread.sleep(10000);
         getJobInformationPage aboutJob = new getJobInformationPage(driver,1);
         aboutJob.getJobsPage();
         takeScr.takeScreenShot(Constants.PicturesFolderPath+"jobInformation.png");
         //---------------------------------------------------------------------------------------------------------------------------
+        Allure.step("Step6: Click on apply to one of the jobs");
         ApplyToJobPage apply = new ApplyToJobPage(driver,1);
         apply.getApplyJobsPage();
         //---------------------------------------------------------------------------------------------------------------------------
+        Allure.step("Step7: Apply for the job");
         ApplyToJobFormatPage sendApplication =  new ApplyToJobFormatPage(driver);
         sendApplication.applyToJobFormatPageMethod( name,  jobName,  id,  phone,  address,  email,  description,  path);
         Thread.sleep(5000);

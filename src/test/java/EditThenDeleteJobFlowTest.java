@@ -1,6 +1,7 @@
 import core.Constants;
 import core.ReadCsvFile;
 import core.TakeScreenShot;
+import io.qameta.allure.Allure;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -36,13 +37,18 @@ public class EditThenDeleteJobFlowTest {
     @Test (dataProvider = "getData")
     public void editJobTest(String jobName, String jobDiscription, String jobPosition, String jobPayPerHour , String jobAddress, String path ) throws InterruptedException, IOException {
         WebDriver driver = BaseTest.Login();
+        takeScr = new TakeScreenShot(driver);
         //--------------------------------------------------------------------------------------------------------------
+        Allure.step("Step3: Go to Jobs page");
         GoToFeaturePage gotoWorker = new GoToFeaturePage(driver, "Jobs");
         gotoWorker.gotoFeaturePageMethod();
+        takeScr.takeScreenShot(Constants.PicturesFolderPath+"JobsBeforeEdit.png");
         //--------------------------------------------------------------------------------------------------------------
+        Allure.step("Step4: Click on edit job");
         EditJobPage editJob = new EditJobPage(driver, 2);
         editJob.editJobMethod();
         //--------------------------------------------------------------------------------------------------------------
+        Allure.step("Step5: fill the job information");
         EditJobFormatPage editJob1 = new EditJobFormatPage(driver);
         editJob1.editJobMethod(jobName, jobDiscription, jobPosition, jobPayPerHour, jobAddress, path);
         Thread.sleep(10000);
@@ -51,6 +57,7 @@ public class EditThenDeleteJobFlowTest {
         Thread.sleep(10000);
         takeScr.takeScreenShot(Constants.PicturesFolderPath+"editJobs.png");
         //--------------------------------------------------------------------------------------------------------------
+        Allure.step("Step6:assertEquals between the job information from the csv file and the edited job");
         int jobNumber = 2;
 
         this.Name = driver.findElement(By.xpath("//*[@id=\"table-to-xls\"]/tbody/tr["+jobNumber+"]/th"));
@@ -66,17 +73,23 @@ public class EditThenDeleteJobFlowTest {
         assertEquals(jobPayPerHour, this.PayPerHour.getText());
         assertEquals(jobAddress, this.Address.getText());
         //--------------------------------------------------------------------------------------------------------------
+        Allure.step("Step7:View the new job profile");
         Thread.sleep(5000);
         ViewJobPage viewJob = new ViewJobPage(driver, 2);
         viewJob.viewJobMethod();
         //--------------------------------------------------------------------------------------------------------------
+        Allure.step("Step8: Go to Jobs page");
         Thread.sleep(5000);
         GoToFeaturePage gotoDeleteJob = new GoToFeaturePage(driver, "Jobs");
         gotoDeleteJob.gotoFeaturePageMethod();
+        Thread.sleep(5000);
+        takeScr.takeScreenShot(Constants.PicturesFolderPath+"JobsBeforeDelete.png");
         //--------------------------------------------------------------------------------------------------------------
+        Allure.step("Step9: delete Job");
         DeleteJobPage deleteJob = new DeleteJobPage(driver, 2);
         deleteJob.deleteJobMethod();
         Thread.sleep(5000);
+        takeScr.takeScreenShot(Constants.PicturesFolderPath+"JobsAfterDelete.png");
         driver.switchTo().alert().accept();
     }
 

@@ -1,6 +1,7 @@
 import core.Constants;
 import core.ReadCsvFile;
 import core.TakeScreenShot;
+import io.qameta.allure.Allure;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -38,14 +39,18 @@ public class AddWorkerFlowTest {
     @Test (dataProvider = "addWorkerData")
     public void addWorkerTest(String name, String id, String address, String phoneNumber, String email, String company, String dateOfStartingJob, String dateOfFinishingJob , String path) throws InterruptedException, IOException {
         WebDriver driver = BaseTest.Login();
+        takeScr = new TakeScreenShot(driver);
         //--------------------------------------------------------------------------------------------------------------
+        Allure.step("Step3: Go to workers page");
         GoToFeaturePage gotoWorker = new GoToFeaturePage(driver, "Workers");
         gotoWorker.gotoFeaturePageMethod();
         takeScr.takeScreenShot(Constants.PicturesFolderPath+"workersBeforeAdd.png");
         //--------------------------------------------------------------------------------------------------------------
+        Allure.step("Step4: Click on create new worker");
         GoToAddFeatureFormat newWorker = new GoToAddFeatureFormat(driver, "Create New Wokrer");
         newWorker.goToAddFeatureFormatMethod();
         //--------------------------------------------------------------------------------------------------------------
+        Allure.step("Step5: fill the worker information");
         AddWorkerPage newWorkers = new AddWorkerPage(driver);
         newWorkers.addNewWorkerMethod(name, id, address, phoneNumber, email, company, dateOfStartingJob, dateOfFinishingJob, path);
         Thread.sleep(10000);
@@ -54,6 +59,7 @@ public class AddWorkerFlowTest {
         Thread.sleep(10000);
         takeScr.takeScreenShot(Constants.PicturesFolderPath+"workersAfterAdd.png");
         //--------------------------------------------------------------------------------------------------------------
+        Allure.step("Step6:assertEquals between the worker information from the csv file and the added worker");
         int workerNumber = 2;
 
         this.WorkerName = driver.findElement(By.xpath("//*[@id=\"table-to-xls\"]/tbody/tr["+workerNumber+"]/th"));
@@ -70,9 +76,11 @@ public class AddWorkerFlowTest {
         assertEquals(email, this.workerEmail.getText());
         assertEquals(company, this.workerCompany.getText());
         //--------------------------------------------------------------------------------------------------------------
+        Allure.step("Step7:View the new worker profile");
         Thread.sleep(5000);
         ViewWorkerPage viewWorker = new ViewWorkerPage(driver, 2);
         viewWorker.viewWorkerMethod();
+
     }
 
 

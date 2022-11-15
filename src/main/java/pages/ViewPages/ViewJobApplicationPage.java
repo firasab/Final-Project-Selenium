@@ -1,4 +1,5 @@
 package pages.ViewPages;
+import core.Constants;
 import core.WriteCsvFile;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -47,6 +48,6 @@ public class ViewJobApplicationPage {
         website_data[6] = Note.getText();
         List<String[]> data = new ArrayList<String[]>();
         data.add(website_data);
-        WriteCsvFile.writeDataLineByLine("jobApplicationInfo.csv", data, headers);
+        WriteCsvFile.writeDataLineByLine(Constants.WriteFolderPath+"jobApplicationInfo.csv", data, headers);
     }
 }

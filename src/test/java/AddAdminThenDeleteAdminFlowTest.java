@@ -1,5 +1,7 @@
 import core.Constants;
 import core.ReadCsvFile;
+import core.TakeScreenShot;
+import io.qameta.allure.Allure;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -16,7 +18,7 @@ import static org.testng.AssertJUnit.assertEquals;
 
 public class AddAdminThenDeleteAdminFlowTest {
     WebElement Name,  Email;
-
+    TakeScreenShot takeScr;
     @DataProvider
     public static Object[][] getData() throws Exception{
 
@@ -34,13 +36,19 @@ public class AddAdminThenDeleteAdminFlowTest {
     @Test(dataProvider = "getData")
     public void addAdminTest( String adminName, String adminEmail, String adminID, String adminFirstPassWord, String adminSecPassWord ) throws InterruptedException, IOException {
         WebDriver driver = BaseTest.Login();
+        takeScr = new TakeScreenShot(driver);
         //--------------------------------------------------------------------------------------------------------------
+        Allure.step("Step3: Go to admins page");
         GoToFeaturePage gotoAdmin = new GoToFeaturePage(driver, "Admins");
         gotoAdmin.gotoFeaturePageMethod();
+        Thread.sleep(2000);
+        takeScr.takeScreenShot(Constants.PicturesFolderPath+"admins.png");
         //--------------------------------------------------------------------------------------------------------------
+        Allure.step("Step4: Click on create new admin");
         GoToAddFeatureFormat goToNewAdmin = new GoToAddFeatureFormat(driver, "Create New Admin");
         goToNewAdmin.goToAddFeatureFormatMethod();
         //--------------------------------------------------------------------------------------------------------------
+        Allure.step("Step5: fill the admin information");
         Thread.sleep(5000);
         AddAdminPage newAdmin = new AddAdminPage(driver);
         newAdmin.addAdminMethod( adminName,  adminEmail,  adminID,  adminFirstPassWord,  adminSecPassWord);
@@ -50,6 +58,7 @@ public class AddAdminThenDeleteAdminFlowTest {
         GoToFeaturePage gotoAdmin2 = new GoToFeaturePage(driver, "Admins");
         gotoAdmin2.gotoFeaturePageMethod();
         //--------------------------------------------------------------------------------------------------------------
+        Allure.step("Step6:assertEquals between the admin information from the csv file and the added admin");
         Thread.sleep(5000);
         int adminNumber = 2;
 
@@ -59,6 +68,7 @@ public class AddAdminThenDeleteAdminFlowTest {
         assertEquals(adminName, this.Name.getText());
         assertEquals(adminEmail, this.Email.getText());
         //--------------------------------------------------------------------------------------------------------------
+        Allure.step("Step7:delete the new admin");
         Thread.sleep(5000);
         DeleteAdminPage deleteAdmin = new DeleteAdminPage(driver, 2);
         deleteAdmin.deleteAdminMethod();

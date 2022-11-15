@@ -1,10 +1,12 @@
 package pages.AddPages;
 
 import core.Constants;
+import core.TakeScreenShot;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import java.io.File;
+import java.io.IOException;
 
 public class AddWorkerPage {
     WebElement workerName;
@@ -17,6 +19,7 @@ public class AddWorkerPage {
     WebElement dateOfFinishingJob;
     WebElement image;
     WebElement addBtn;
+    TakeScreenShot takeScr;
 
     public AddWorkerPage(WebDriver driver) {
         this.workerName = driver.findElement(By.id("name"));
@@ -29,9 +32,10 @@ public class AddWorkerPage {
         this.dateOfFinishingJob = driver.findElement(By.id("mui-6"));
         this.image = driver.findElement(By.xpath(Constants.ADD_WORKER_XPATH_IMG));
         this.addBtn = driver.findElement(By.xpath(Constants.ADD_WORKER_XPATH_BTN));
+        takeScr = new TakeScreenShot(driver);
     }
 
-    public void addNewWorkerMethod(String name, String id, String address, String phoneNumber, String email, String company, String dateOfStartingJob, String dateOfFinishingJob,String path) throws InterruptedException {
+    public void addNewWorkerMethod(String name, String id, String address, String phoneNumber, String email, String company, String dateOfStartingJob, String dateOfFinishingJob,String path) throws InterruptedException, IOException {
         this.workerName.sendKeys(name);
         this.workerID.sendKeys(id);
         this.workerAddress.sendKeys(address);
@@ -43,6 +47,7 @@ public class AddWorkerPage {
         File file = new File(path);
         this.image.sendKeys(file.getAbsolutePath());
         Thread.sleep(5000);
+        takeScr.takeScreenShot(Constants.PicturesFolderPath+"workerInformation.png");
         this.addBtn.click();
     }
 }

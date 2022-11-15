@@ -1,10 +1,12 @@
 package pages.AddPages;
 
 import core.Constants;
+import core.TakeScreenShot;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import java.io.File;
+import java.io.IOException;
 
 public class AddJobPage {
     WebElement jobName;
@@ -14,6 +16,7 @@ public class AddJobPage {
     WebElement jobAddress;
     WebElement image;
     WebElement addBtn;
+    TakeScreenShot takeScr;
 
 
     public AddJobPage(WebDriver driver) {
@@ -24,9 +27,10 @@ public class AddJobPage {
         this.jobAddress = driver.findElement(By.id("address"));
         this.image = driver.findElement(By.xpath(Constants.ADD_JOB_XPATH_IMG));
         this.addBtn = driver.findElement(By.xpath(Constants.ADD_JOB_XPATH_BTN));
+        takeScr = new TakeScreenShot(driver);
     }
 
-    public void addNewJobMethod(String jobName, String jobDiscription, String jobPosition, String jobPayPerHour, String jobAddress, String path) throws InterruptedException {
+    public void addNewJobMethod(String jobName, String jobDiscription, String jobPosition, String jobPayPerHour, String jobAddress, String path) throws InterruptedException, IOException {
         this.jobName.sendKeys(jobName);
         this.jobDiscription.sendKeys(jobDiscription);
         this.jobPosition.sendKeys(jobPosition);
@@ -35,6 +39,7 @@ public class AddJobPage {
         File file = new File(path);
         this.image.sendKeys(file.getAbsolutePath());
         Thread.sleep(5000);
+        takeScr.takeScreenShot(Constants.PicturesFolderPath+"jobInformation.png");
         this.addBtn.click();
     }
 }

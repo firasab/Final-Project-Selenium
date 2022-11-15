@@ -1,6 +1,7 @@
 import core.Constants;
 import core.ReadCsvFile;
 import core.TakeScreenShot;
+import io.qameta.allure.Allure;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -38,12 +39,16 @@ public class AddJobFlowTest {
         WebDriver driver = BaseTest.Login();
         takeScr = new TakeScreenShot(driver);
         //--------------------------------------------------------------------------------------------------------------
+        Allure.step("Step3: Go to jobs page");
         GoToFeaturePage gotoWorker = new GoToFeaturePage(driver, "Jobs");
         gotoWorker.gotoFeaturePageMethod();
+        takeScr.takeScreenShot(Constants.PicturesFolderPath+"jobsBeforeAdd.png");
         //--------------------------------------------------------------------------------------------------------------
+        Allure.step("Step4: Click on create new job");
         GoToAddFeatureFormat newJob = new GoToAddFeatureFormat(driver, "Create New Job");
         newJob.goToAddFeatureFormatMethod();
         //--------------------------------------------------------------------------------------------------------------
+        Allure.step("Step5: fill the job information");
         AddJobPage newWorkers = new AddJobPage(driver);
         newWorkers.addNewJobMethod(jobName, jobDiscription, jobPosition, jobPayPerHour, jobAddress, path);
         Thread.sleep(10000);
@@ -52,6 +57,7 @@ public class AddJobFlowTest {
         Thread.sleep(10000);
         takeScr.takeScreenShot(Constants.PicturesFolderPath+"jobs.png");
         //--------------------------------------------------------------------------------------------------------------
+        Allure.step("Step6:assertEquals between the job information from the csv file and the added job");
         Thread.sleep(5000);
         int jobNumber = 3;
 
@@ -67,6 +73,7 @@ public class AddJobFlowTest {
         assertEquals(jobPayPerHour, this.PayPerHour.getText());
         assertEquals(jobAddress, this.Address.getText());
         //--------------------------------------------------------------------------------------------------------------
+        Allure.step("Step7:View the new job profile");
         Thread.sleep(5000);
         ViewJobPage viewJob = new ViewJobPage(driver, 2);
         viewJob.viewJobMethod();

@@ -2,9 +2,11 @@ package pages.EditPages;
 
 import core.ClearField;
 import core.Constants;
+import core.TakeScreenShot;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import java.io.File;
+import java.io.IOException;
 
 public class EditWorkerFormatPage {
     WebElement workerName;
@@ -17,6 +19,7 @@ public class EditWorkerFormatPage {
     WebElement image;
     WebElement addBtn;
     WebDriver driver;
+    TakeScreenShot takeScr;
 
     public EditWorkerFormatPage(WebDriver driver) {
         this.driver = driver;
@@ -29,10 +32,11 @@ public class EditWorkerFormatPage {
         dateOfFinishingJob = driver.findElement(By.id("mui-3"));
         image = driver.findElement(By.xpath(Constants.EDIT_WORKER_XPATH_IMG));
         addBtn = driver.findElement(By.xpath(Constants.EDIT_WORKER_XPATH_BTN));
+        takeScr = new TakeScreenShot(driver);
     }
 
 
-    public void editWorkerMethod(String name, String id, String address, String phoneNumber, String email, String company, String dateOfFinishing, String path) throws InterruptedException {
+    public void editWorkerMethod(String name, String id, String address, String phoneNumber, String email, String company, String dateOfFinishing, String path) throws InterruptedException, IOException {
         Thread.sleep(1000);
         ClearField clear = new ClearField();
         clear.ClearCompanyField(this.workerName, driver);
@@ -59,6 +63,7 @@ public class EditWorkerFormatPage {
         image.sendKeys(file.getAbsolutePath());
 
         Thread.sleep(5000);
+        takeScr.takeScreenShot(Constants.PicturesFolderPath+"workerInformation.png");
         addBtn.click();
     }
 }
