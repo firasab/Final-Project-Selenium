@@ -89,7 +89,6 @@ public class EditThenDeleteJobFlowTest {
         DeleteJobPage deleteJob = new DeleteJobPage(driver, 2);
         deleteJob.deleteJobMethod();
         Thread.sleep(5000);
-        takeScr.takeScreenShot(Constants.PicturesFolderPath+"JobsAfterDelete.png");
         driver.switchTo().alert().accept();
     }
 

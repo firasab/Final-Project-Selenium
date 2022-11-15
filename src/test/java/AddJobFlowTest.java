@@ -59,7 +59,7 @@ public class AddJobFlowTest {
         //--------------------------------------------------------------------------------------------------------------
         Allure.step("Step6:assertEquals between the job information from the csv file and the added job");
         Thread.sleep(5000);
-        int jobNumber = 3;
+        int jobNumber = 2;
 
         this.Name = driver.findElement(By.xpath("//*[@id=\"table-to-xls\"]/tbody/tr["+jobNumber+"]/th"));
         this.Description = driver.findElement(By.xpath("//*[@id=\"table-to-xls\"]/tbody/tr["+jobNumber+"]/td[1]"));

@@ -89,7 +89,6 @@ public class EditThenDeleteWorkerFlowTest {
         DeleteWorkerPage deleteWorker = new DeleteWorkerPage(driver, 2);
         deleteWorker.deleteWorkerMethod();
         Thread.sleep(5000);
-        takeScr.takeScreenShot(Constants.PicturesFolderPath+"WorkersAfterDelete.png");
         driver.switchTo().alert().accept();
     }
 

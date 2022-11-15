@@ -86,7 +86,6 @@ public class EditThenDeleteCompanyFlowTest {
         DeleteCompanyPage deleteCompany = new DeleteCompanyPage(driver, 2);
         deleteCompany.deleteCompanyMethod();
         Thread.sleep(5000);
-        takeScr.takeScreenShot(Constants.PicturesFolderPath+"CompaniesAfterDelete.png");
         driver.switchTo().alert().accept();
     }
 
